@@ -118,3 +118,25 @@ Two Maven profiles have been defined in this project to support compiling Spring
 [azure-spring-boot-starter-keyvault-certificates:3.14.0]: https://search.maven.org/artifact/com.azure.spring/azure-spring-boot-starter-keyvault-certificates/3.14.0/jar
 [azure-spring-data-cosmos:3.23.0]: https://search.maven.org/artifact/com.azure/azure-spring-data-cosmos/3.23.0/jar
 [spring-cloud-azure-native-configuration:4.0.0-beta.1]: https://search.maven.org/artifact/com.azure.spring/spring-cloud-azure-native-configuration/4.0.0-beta.1/jar
+
+
+####Getting this error:
+```aidl 
+│ Error: expected "principal_id" to be a valid UUID, got
+│
+│   with azurerm_cosmosdb_sql_role_assignment.assignment,
+│   on main.tf line 89, in resource "azurerm_cosmosdb_sql_role_assignment" "assignment":
+│   89:   principal_id        = data.azurerm_client_config.current.object_id
+
+```
+Update to
+```azurerm = {
+source  = "hashicorp/azurerm"
+version = "3.23.0"
+}
+```
+
+When updating modules i.e. azurerm you must run
+```
+   terraform init -upgrade
+```

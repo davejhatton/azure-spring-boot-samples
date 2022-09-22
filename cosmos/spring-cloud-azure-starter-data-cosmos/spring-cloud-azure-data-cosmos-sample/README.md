@@ -179,3 +179,25 @@ terraform -chdir=./terraform destroy -auto-approve
 ```shell
 terraform -chdir=terraform destroy -auto-approve
 ```
+
+
+####Getting this error:
+```aidl 
+│ Error: expected "principal_id" to be a valid UUID, got
+│
+│   with azurerm_cosmosdb_sql_role_assignment.assignment,
+│   on main.tf line 89, in resource "azurerm_cosmosdb_sql_role_assignment" "assignment":
+│   89:   principal_id        = data.azurerm_client_config.current.object_id
+
+```
+Update to
+```azurerm = {
+source  = "hashicorp/azurerm"
+version = "3.23.0"
+}
+```
+
+When updating modules i.e. azurerm you must run
+```
+   terraform init -upgrade
+```
